@@ -56,7 +56,7 @@ class Browser extends ViewableData {
 	const IOS = "ios";
 
 	/**
-	 * Intenet explorer.
+	 * Internet explorer.
 	 * @var string
 	 */
 	const IE = "ie";
@@ -181,8 +181,18 @@ class Browser extends ViewableData {
 
 
 		// Version
-		$split = preg_split("/\./", $matches['version'][$index]);
-
+		$value = $matches['version'][$index];
+		$start = stripos($agent, "version/");
+		if ($start !== false) {
+			$start = $start + 8;
+			$end = stripos($agent, " ", $start);
+			$length = strlen($agent);
+			if ($end !== false) {
+				$length = $end - $start;
+			}
+			$value = substr($agent, $start, $length);
+		}
+		$split = preg_split("/\./", $value);
 		$version = null;
 		if (count($split) > 0) {
 			$version = $split[0];
