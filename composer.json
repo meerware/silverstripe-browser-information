@@ -1,5 +1,5 @@
 {
-    "name": "meerware/silverstripe-browser-information",
+    "name": "meerware/browser-information",
     "type": "silverstripe-module",
     "target-dir": "browser-information",
     "description": "SilverStripe Module detecting browser information",
