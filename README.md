@@ -1,5 +1,5 @@
-SilverStripe Module: Browser Information
-========================================
+Browser Information for SilverStripe
+====================================
 
 A small module for detecting the browser name, version, operating system and device type through the
 browser user agent and exposing methods for controllers.
