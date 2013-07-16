@@ -4,7 +4,7 @@
     "target-dir": "browser-information",
     "description": "SilverStripe Module detecting browser information",
     "keywords": ["silverstripe","browser"],
-    "homepage": "https://https://github.com/meerware/silverstripe-browser-information",
+    "homepage": "https://github.com/meerware/silverstripe-browser-information",
     "license": "BSD",
     "authors": [{
         "name": "Meerware",
