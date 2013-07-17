@@ -166,6 +166,16 @@ class BrowserTest extends SapphireTest {
 	);
 
 	/**
+	 * Google bot user agent fixtures.
+	 * @var array
+	 */
+	private static $googlebot = array(
+		"Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+		"Googlebot/2.1 (+http://www.googlebot.com/bot.html)",
+		"Googlebot/2.1 (+http://www.google.com/bot.html)"
+	);
+
+	/**
 	 * Should parse Chrome.
 	 */
 	public function testShouldParseChrome() {
@@ -205,6 +215,16 @@ class BrowserTest extends SapphireTest {
 	 */
 	public function testShouldParseOpera() {
 		$this->assertParse(self::$opera);
+	}
+
+	/**
+	 * Should parse Google Bot.
+	 */
+	public function testShouldParseGoogleBot() {
+		foreach (self::$googlebot as $agent) {
+			$browser = Browser::parse($agent);
+			$this->assertNotNull($browser);
+		}
 	}
 
 	/**
