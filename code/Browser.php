@@ -98,6 +98,30 @@ class Browser extends ViewableData {
 	const KONQUEROR = "konqueror";
 
 	/**
+	 * Webkit engine.
+	 * @var string
+	 */
+	const WEBKIT = "webkit";
+
+	/**
+	 * Trident engine.
+	 * @var string
+	 */
+	const TRIDENT = "trident";
+
+	/**
+	 * Gecko engine.
+	 * @var string
+	 */
+	const GECKO = "gecko";
+
+	/**
+	 * Presto engine.
+	 * @var string
+	 */
+	const PRESTO = "presto";
+
+	/**
 	 * Current browser.
 	 * @var Browser
 	 */
@@ -128,6 +152,12 @@ class Browser extends ViewableData {
 	private $version = null;
 
 	/**
+	 * Browser rendering engine.
+	 * @var string
+	 */
+	private $engine = null;
+
+	/**
 	 * @return Browser Returns the current browser as indicated by the user agent.
 	 */
 	public static function current_browser() {
@@ -148,19 +178,20 @@ class Browser extends ViewableData {
 		$browser = new Browser();
 
 		// System
-		if (preg_match('/linux/i', $agent)) {
-			$browser->system = self::LINUX;
-		} elseif (preg_match('/ipod|iphone|ipad/i', $agent)) {
+		if (preg_match('/ipod|iphone|ipad/i', $agent)) {
 			$browser->system = self::IOS;
 			$browser->device = self::HANDHELD;
-		} elseif (preg_match('/andriod/i', $agent)) {
+		} elseif (preg_match('/android/i', $agent)) {
 			$browser->system = self::ANDROID;
 			$browser->device = self::HANDHELD;
 		} elseif (preg_match('/macintosh|mac os x/i', $agent)) {
 			$browser->system = self::MACINTOSH;
 		} elseif (preg_match('/windows|win32/i', $agent)) {
 			$browser->system = self::WINDOWS;
+		} elseif (preg_match('/linux/i', $agent)) {
+			$browser->system = self::LINUX;
 		}
+
 
 		// Name
 		$known = array('msie', self::FIREFOX, self::CHROME, self::SAFARI, self::OPERA, self::NETSCAPE, self::KONQUEROR);
@@ -206,6 +237,23 @@ class Browser extends ViewableData {
 			$browser->version = $version;
 		}
 
+
+
+		// Engine
+		if ($browser->name == self::CHROME || $browser->name == self::SAFARI) {
+			$browser->engine = self::WEBKIT;
+		} elseif ($browser->name == self::IE) {
+			$browser->engine = self::TRIDENT;
+		} elseif ($browser->name == self::OPERA) {
+			$browser->engine = self::PRESTO;
+		} elseif ($browser->name == self::FIREFOX) {
+			$browser->engine = self::GECKO;
+		} elseif (stripos($agent, self::WEBKIT) !== false || stripos($agent, "khtml")) {
+			$browser->engine = self::WEBKIT;
+		} elseif (stripos($agent, self::GECKO)) {
+			$browser->engine = self::GECKO;
+		}
+
 		return $browser;
 	}
 
@@ -238,10 +286,17 @@ class Browser extends ViewableData {
 	}
 
 	/**
-	 * @return string
+	 * @return string is the browser version.
 	 */
 	public function getVersion() {
 		return $this->version;
+	}
+
+	/**
+	 * @return string is the rendering engine.
+	 */
+	public function getEngine() {
+		return $this->engine;
 	}
 
 	/**
@@ -272,6 +327,11 @@ class Browser extends ViewableData {
 		if ($this->device) {
 			$template[] = $this->device;
 		}
+
+		if ($this->engine) {
+			$template[] = $this->engine;
+		}
+
 		return join(' ', $template);
 	}
 

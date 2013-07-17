@@ -72,6 +72,19 @@ will return the following values:
 * screen
 * handheld
 
+### Engine
+
+```php
+$browser->getEngine();
+```
+
+Detects the browser rendering engine and will return the following values:
+
+* gecko
+* webkit
+* trident
+* presto
+
 ### Templates
 
 When the module is included in your SilverStripe directory structure, the module, through extension, will expose
@@ -84,5 +97,5 @@ a browser attribute for use in templates:
 Will be evaluated to something like:
 
 ```html
-<html class="macintosh firefox firefox22 screen">
+<html class="macintosh firefox firefox22 screen gecko">
 ```
