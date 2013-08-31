@@ -12,6 +12,6 @@
         "homepage": "http://meeware.com"
     }],
     "require": {
-        "silverstripe/framework": ">=3"
+        "silverstripe/framework": "~3.0"
     }
 }
