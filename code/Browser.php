@@ -5,334 +5,343 @@
  * @author Matt Howlett
  * @package browser-information
  */
-class Browser extends ViewableData {
+class Browser extends ViewableData
+{
 
-	/**
-	 * Unknown value, used for name or system when we can't get a match.
-	 * @var string
-	 */
-	const UNKNOWN = "unknown";
+    /**
+     * Unknown value, used for name or system when we can't get a match.
+     * @var string
+     */
+    const UNKNOWN = "unknown";
 
-	/**
-	 * Screen device type.
-	 * @var string
-	 */
-	const SCREEN = "screen";
+    /**
+     * Screen device type.
+     * @var string
+     */
+    const SCREEN = "screen";
 
-	/**
-	 * Handheld device type, mobile or tablet.
-	 * @var string
-	 */
-	const HANDHELD = "handheld";
+    /**
+     * Handheld device type, mobile or tablet.
+     * @var string
+     */
+    const HANDHELD = "handheld";
 
-	/**
-	 * Linux operating system.
-	 * @var string
-	 */
-	const LINUX = "linux";
+    /**
+     * Linux operating system.
+     * @var string
+     */
+    const LINUX = "linux";
 
-	/**
-	 * Macintosh operating system.
-	 * @var string
-	 */
-	const MACINTOSH = "macintosh";
+    /**
+     * Macintosh operating system.
+     * @var string
+     */
+    const MACINTOSH = "macintosh";
 
-	/**
-	 * Windows operating system.
-	 * @var string
-	 */
-	const WINDOWS = "windows";
+    /**
+     * Windows operating system.
+     * @var string
+     */
+    const WINDOWS = "windows";
 
-	/**
-	 * Android operating system.
-	 * @var string
-	 */
-	const ANDROID = "android";
+    /**
+     * Android operating system.
+     * @var string
+     */
+    const ANDROID = "android";
 
-	/**
-	 * iOS operating system (iPad, iPod and iPhone).
-	 * @var string
-	 */
-	const IOS = "ios";
+    /**
+     * iOS operating system (iPad, iPod and iPhone).
+     * @var string
+     */
+    const IOS = "ios";
 
-	/**
-	 * Internet explorer.
-	 * @var string
-	 */
-	const IE = "ie";
+    /**
+     * Internet explorer.
+     * @var string
+     */
+    const IE = "ie";
 
-	/**
-	 * Firefox browser.
-	 * @var string
-	 */
-	const FIREFOX = "firefox";
+    /**
+     * Firefox browser.
+     * @var string
+     */
+    const FIREFOX = "firefox";
 
-	/**
-	 * Chrome browser.
-	 * @var string.
-	 */
-	const CHROME = "chrome";
+    /**
+     * Chrome browser.
+     * @var string.
+     */
+    const CHROME = "chrome";
 
-	/**
-	 * Safari browser.
-	 * @var string
-	 */
-	const SAFARI = "safari";
+    /**
+     * Safari browser.
+     * @var string
+     */
+    const SAFARI = "safari";
 
-	/**
-	 * Opera browser.
-	 * @var string
-	 */
-	const OPERA = "opera";
+    /**
+     * Opera browser.
+     * @var string
+     */
+    const OPERA = "opera";
 
-	/**
-	 * Netscape browser.
-	 * @var string
-	 */
-	const NETSCAPE = "netscape";
+    /**
+     * Netscape browser.
+     * @var string
+     */
+    const NETSCAPE = "netscape";
 
-	/**
-	 * Konqueror browser.
-	 * @var string
-	 */
-	const KONQUEROR = "konqueror";
+    /**
+     * Konqueror browser.
+     * @var string
+     */
+    const KONQUEROR = "konqueror";
 
-	/**
-	 * Webkit engine.
-	 * @var string
-	 */
-	const WEBKIT = "webkit";
+    /**
+     * Webkit engine.
+     * @var string
+     */
+    const WEBKIT = "webkit";
 
-	/**
-	 * Trident engine.
-	 * @var string
-	 */
-	const TRIDENT = "trident";
+    /**
+     * Trident engine.
+     * @var string
+     */
+    const TRIDENT = "trident";
 
-	/**
-	 * Gecko engine.
-	 * @var string
-	 */
-	const GECKO = "gecko";
+    /**
+     * Gecko engine.
+     * @var string
+     */
+    const GECKO = "gecko";
 
-	/**
-	 * Presto engine.
-	 * @var string
-	 */
-	const PRESTO = "presto";
+    /**
+     * Presto engine.
+     * @var string
+     */
+    const PRESTO = "presto";
 
-	/**
-	 * Current browser.
-	 * @var Browser
-	 */
-	private static $browser = null;
+    /**
+     * Current browser.
+     * @var Browser
+     */
+    private static $browser = null;
 
-	/**
-	 * Browser name.
-	 * @var string
-	 */
-	private $name = self::UNKNOWN;
+    /**
+     * Browser name.
+     * @var string
+     */
+    private $name = self::UNKNOWN;
 
-	/**
-	 * System name.
-	 * @var string
-	 */
-	private $system = self::UNKNOWN;
+    /**
+     * System name.
+     * @var string
+     */
+    private $system = self::UNKNOWN;
 
-	/**
-	 * Device type.
-	 * @var string
-	 */
-	private $device = self::SCREEN;
+    /**
+     * Device type.
+     * @var string
+     */
+    private $device = self::SCREEN;
 
-	/**
-	 * Browser version.
-	 * @var string
-	 */
-	private $version = null;
+    /**
+     * Browser version.
+     * @var string
+     */
+    private $version = null;
 
-	/**
-	 * Browser rendering engine.
-	 * @var string
-	 */
-	private $engine = null;
+    /**
+     * Browser rendering engine.
+     * @var string
+     */
+    private $engine = null;
 
-	/**
-	 * @return Browser Returns the current browser as indicated by the user agent.
-	 */
-	public static function current_browser() {
-		if (self::$browser) {
-			return self::$browser;
-		}
-		self::$browser = self::parse();
-		return self::$browser;
-	}
+    /**
+     * @return Browser Returns the current browser as indicated by the user agent.
+     */
+    public static function current_browser()
+    {
+        if (self::$browser) {
+            return self::$browser;
+        }
+        self::$browser = self::parse();
+        return self::$browser;
+    }
 
-	/**
-	 * @param string $agent is the optional user agent. This will default to the one defined by the server.
-	 * @return Browser
-	 */
-	public static function parse($agent = false) {
-		$agent = strtolower($agent ? $agent : $_SERVER['HTTP_USER_AGENT']);
+    /**
+     * @param string $agent is the optional user agent. This will default to the one defined by the server.
+     * @return Browser
+     */
+    public static function parse($agent = false)
+    {
+        $agent = strtolower($agent ? $agent : $_SERVER['HTTP_USER_AGENT']);
 
-		$browser = new Browser();
+        $browser = new Browser();
 
-		// System
-		if (preg_match('/ipod|iphone|ipad/i', $agent)) {
-			$browser->system = self::IOS;
-			$browser->device = self::HANDHELD;
-		} elseif (preg_match('/android/i', $agent)) {
-			$browser->system = self::ANDROID;
-			$browser->device = self::HANDHELD;
-		} elseif (preg_match('/macintosh|mac os x/i', $agent)) {
-			$browser->system = self::MACINTOSH;
-		} elseif (preg_match('/windows|win32/i', $agent)) {
-			$browser->system = self::WINDOWS;
-		} elseif (preg_match('/linux/i', $agent)) {
-			$browser->system = self::LINUX;
-		}
-
-
-		// Name
-		$known = array('msie', self::FIREFOX, self::CHROME, self::SAFARI, self::OPERA, self::NETSCAPE, self::KONQUEROR);
-		$pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9]+(?:\.[0-9]+)?)#';
-		if (!preg_match_all($pattern, $agent, $matches)) {
-			return $browser;
-		}
-
-		$index = 0;
-		$count = count($matches['browser']);
-		for ($i = 0; $i < $count; $i++) {
-			$index = $i;
-			if ($matches['browser'][$i] == self::CHROME) {
-				break;
-			}
-		}
-		$browser->name = ($matches['browser'][$index] == "msie") ? self::IE : $matches['browser'][$index];
+        // System
+        if (preg_match('/ipod|iphone|ipad/i', $agent)) {
+            $browser->system = self::IOS;
+            $browser->device = self::HANDHELD;
+        } elseif (preg_match('/android/i', $agent)) {
+            $browser->system = self::ANDROID;
+            $browser->device = self::HANDHELD;
+        } elseif (preg_match('/macintosh|mac os x/i', $agent)) {
+            $browser->system = self::MACINTOSH;
+        } elseif (preg_match('/windows|win32/i', $agent)) {
+            $browser->system = self::WINDOWS;
+        } elseif (preg_match('/linux/i', $agent)) {
+            $browser->system = self::LINUX;
+        }
 
 
-		// Version
-		$value = $matches['version'][$index];
-		$start = stripos($agent, "version/");
-		if ($start !== false) {
-			$start = $start + 8;
-			$end = stripos($agent, " ", $start);
-			$length = strlen($agent);
-			if ($end !== false) {
-				$length = $end - $start;
-			}
-			$value = substr($agent, $start, $length);
-		}
-		$split = preg_split("/\./", $value);
-		$version = null;
-		if (count($split) > 0) {
-			$version = $split[0];
-		}
-		if (count($split) > 1) {
-			$version = $version . "." . $split[1];
-		}
+        // Name
+        $known = array('msie', self::FIREFOX, self::CHROME, self::SAFARI, self::OPERA, self::NETSCAPE, self::KONQUEROR);
+        $pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9]+(?:\.[0-9]+)?)#';
+        if (!preg_match_all($pattern, $agent, $matches)) {
+            return $browser;
+        }
 
-		// Version
-		if ($version) {
-			$browser->version = $version;
-		}
+        $index = 0;
+        $count = count($matches['browser']);
+        for ($i = 0; $i < $count; $i++) {
+            $index = $i;
+            if ($matches['browser'][$i] == self::CHROME) {
+                break;
+            }
+        }
+        $browser->name = ($matches['browser'][$index] == "msie") ? self::IE : $matches['browser'][$index];
 
 
+        // Version
+        $value = $matches['version'][$index];
+        $start = stripos($agent, "version/");
+        if ($start !== false) {
+            $start = $start + 8;
+            $end = stripos($agent, " ", $start);
+            $length = strlen($agent);
+            if ($end !== false) {
+                $length = $end - $start;
+            }
+            $value = substr($agent, $start, $length);
+        }
+        $split = preg_split("/\./", $value);
+        $version = null;
+        if (count($split) > 0) {
+            $version = $split[0];
+        }
+        if (count($split) > 1) {
+            $version = $version . "." . $split[1];
+        }
 
-		// Engine
-		if ($browser->name == self::CHROME || $browser->name == self::SAFARI) {
-			$browser->engine = self::WEBKIT;
-		} elseif ($browser->name == self::IE) {
-			$browser->engine = self::TRIDENT;
-		} elseif ($browser->name == self::OPERA) {
-			$browser->engine = self::PRESTO;
-		} elseif ($browser->name == self::FIREFOX) {
-			$browser->engine = self::GECKO;
-		} elseif (stripos($agent, self::WEBKIT) !== false || stripos($agent, "khtml")) {
-			$browser->engine = self::WEBKIT;
-		} elseif (stripos($agent, self::GECKO)) {
-			$browser->engine = self::GECKO;
-		}
+        // Version
+        if ($version) {
+            $browser->version = $version;
+        }
 
-		return $browser;
-	}
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
 
-	/**
-	 * @return string
-	 */
-	public function getSystem() {
-		return $this->system;
-	}
+        // Engine
+        if ($browser->name == self::CHROME || $browser->name == self::SAFARI) {
+            $browser->engine = self::WEBKIT;
+        } elseif ($browser->name == self::IE) {
+            $browser->engine = self::TRIDENT;
+        } elseif ($browser->name == self::OPERA) {
+            $browser->engine = self::PRESTO;
+        } elseif ($browser->name == self::FIREFOX) {
+            $browser->engine = self::GECKO;
+        } elseif (stripos($agent, self::WEBKIT) !== false || stripos($agent, "khtml")) {
+            $browser->engine = self::WEBKIT;
+        } elseif (stripos($agent, self::GECKO)) {
+            $browser->engine = self::GECKO;
+        }
 
-	/**
-	 * @return string
-	 */
-	public function getDevice() {
-		return $this->device;
-	}
+        return $browser;
+    }
 
-	/**
-	 * @return boolean
-	 */
-	public function isHandheld() {
-		return $this->getDevice() != self::SCREEN;
-	}
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
-	/**
-	 * @return string is the browser version.
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
+    /**
+     * @return string
+     */
+    public function getSystem()
+    {
+        return $this->system;
+    }
 
-	/**
-	 * @return string is the rendering engine.
-	 */
-	public function getEngine() {
-		return $this->engine;
-	}
+    /**
+     * @return string
+     */
+    public function getDevice()
+    {
+        return $this->device;
+    }
 
-	/**
-	 * Returns a string which can be used as a CSS class.
-	 * @return string
-	 */
-	public function forTemplate() {
-		$template = array();
+    /**
+     * @return boolean
+     */
+    public function isHandheld()
+    {
+        return $this->getDevice() != self::SCREEN;
+    }
 
-		// System
-		if ($this->system) {
-			$template[] = $this->system;
-		}
+    /**
+     * @return string is the browser version.
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
 
-		// Name and version
-		if ($this->name) {
-			$template[] = $this->name;
-			$version = $this->version;
-			if ($version) {
-				$split = preg_split("/\./", $this->version);
-				if (count($split) > 0) {
-					// Name plus major version
-					$template[] = $this->name . $split[0];
-				}
-			}
-		}
+    /**
+     * @return string is the rendering engine.
+     */
+    public function getEngine()
+    {
+        return $this->engine;
+    }
 
-		if ($this->device) {
-			$template[] = $this->device;
-		}
+    /**
+     * Returns a string which can be used as a CSS class.
+     * @return string
+     */
+    public function forTemplate()
+    {
+        $template = array();
 
-		if ($this->engine) {
-			$template[] = $this->engine;
-		}
+        // System
+        if ($this->system) {
+            $template[] = $this->system;
+        }
 
-		return join(' ', $template);
-	}
+        // Name and version
+        if ($this->name) {
+            $template[] = $this->name;
+            $version = $this->version;
+            if ($version) {
+                $split = preg_split("/\./", $this->version);
+                if (count($split) > 0) {
+                    // Name plus major version
+                    $template[] = $this->name . $split[0];
+                }
+            }
+        }
 
+        if ($this->device) {
+            $template[] = $this->device;
+        }
+
+        if ($this->engine) {
+            $template[] = $this->engine;
+        }
+
+        return join(' ', $template);
+    }
 }
