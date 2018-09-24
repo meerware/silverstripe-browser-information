@@ -3,5 +3,5 @@
  * Extension.
  */
 if (class_exists("Controller")) {
-	Object::add_extension("Controller", "BrowserExtension");
+	SS_Object::add_extension("Controller", "BrowserExtension");
 }
